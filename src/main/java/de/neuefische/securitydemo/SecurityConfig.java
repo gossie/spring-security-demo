@@ -24,14 +24,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .mvcMatchers("/api/greet").hasAnyRole("USER", "ADMIN")
-                .and()
+        http.csrf().disable()
                 .authorizeRequests()
+                .mvcMatchers("/api/greet").hasAnyRole("USER", "ADMIN")
                 .mvcMatchers("/api/admingreet").hasRole("ADMIN")
-                .and().authorizeRequests()
+                .mvcMatchers(HttpMethod.POST, "/api/users").permitAll()
                 .antMatchers("/**").authenticated()
-                .antMatchers(HttpMethod.POST, "/api/users").permitAll()
                 .and().formLogin()
                 .and().httpBasic();
     }
