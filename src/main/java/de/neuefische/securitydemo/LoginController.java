@@ -28,21 +28,22 @@ public class LoginController {
     @PostMapping
     public String login(@RequestBody LoginData loginData) {
         try {
-            Authentication auth = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginData.getUsername(), loginData.getPassword())
-            );
-
-            List<String> roles = auth.getAuthorities()
-                    .stream()
-                    .map(GrantedAuthority::getAuthority)
-                    .toList();
+            Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginData.getUsername(), loginData.getPassword()));
 
             Map<String, Object> claims = new HashMap<>();
-            claims.put("roles", roles);
+            claims.put("roles", getRoles(auth));
             return jwtService.createToken(claims, loginData.getUsername());
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid credentials");
         }
+    }
+
+    private List<String> getRoles(Authentication auth) {
+        return auth.getAuthorities()
+                .stream()
+                .map(GrantedAuthority::getAuthority)
+                .toList();
+
     }
 
 }
