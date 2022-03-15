@@ -1,4 +1,4 @@
-package de.neuefische.securitydemo;
+package de.neuefische.securitydemo.user;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;

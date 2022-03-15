@@ -1,4 +1,4 @@
-package de.neuefische.securitydemo;
+package de.neuefische.securitydemo.user;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

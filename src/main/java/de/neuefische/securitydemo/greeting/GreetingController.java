@@ -1,4 +1,4 @@
-package de.neuefische.securitydemo;
+package de.neuefische.securitydemo.greeting;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

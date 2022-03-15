@@ -1,4 +1,4 @@
-package de.neuefische.securitydemo;
+package de.neuefische.securitydemo.greeting;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

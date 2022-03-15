@@ -1,5 +1,6 @@
 package de.neuefische.securitydemo;
 
+import de.neuefische.securitydemo.user.JwtAuthFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;

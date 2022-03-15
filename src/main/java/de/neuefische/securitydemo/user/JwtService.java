@@ -1,4 +1,4 @@
-package de.neuefische.securitydemo;
+package de.neuefische.securitydemo.user;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
