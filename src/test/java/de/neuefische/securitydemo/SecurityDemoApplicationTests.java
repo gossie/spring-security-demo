@@ -2,12 +2,18 @@ package de.neuefische.securitydemo;
 
 import de.neuefische.securitydemo.user.LoginData;
 import de.neuefische.securitydemo.user.UserDocument;
+import net.bytebuddy.agent.builder.AgentBuilder;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,7 +40,7 @@ class SecurityDemoApplicationTests {
 				String.class
 		);
 		assertThat(greetResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
-		assertThat(greetResponse.getBody()).startsWith("Moin");
+		assertThat(greetResponse.getBody()).isEqualTo("Moin test@email.de");
 
 		ResponseEntity<String> adminGreetResponse = restTemplate.exchange(
 				"/api/admingreet",
@@ -45,10 +51,11 @@ class SecurityDemoApplicationTests {
 		assertThat(adminGreetResponse.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
 	}
 
-	HttpHeaders createHeaders(String token){
-		return new HttpHeaders() {{
-			String authHeader = "Bearer " + token;
-			set( "Authorization", authHeader );
-		}};
+	private HttpHeaders createHeaders(String token){
+		String authHeader = "Bearer " + token;
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Authorization", authHeader);
+
+		return headers;
 	}
 }
